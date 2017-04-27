@@ -25,7 +25,6 @@
     .header-bar {
         display: flex;
         background:@mainColor;
-        opacity:0.8;
         justify-content: space-between;
         align-items:center;
         position:fixed;

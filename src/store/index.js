@@ -5,7 +5,8 @@ import actions from './actions'
 Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
-        nightMode: true
+        nightMode: true,
+        tabIndex: 0
     },
     mutations: mutations,
     actions: actions

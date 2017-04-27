@@ -1,6 +1,5 @@
 <template>
     <div class="books-wrap" key="books">
-        <h1 class="list-title">{{listType.title}}</h1>
         <ul class="books">
             <li class="book" v-for="(book,index) in books" @click="readBook(book._id)">
                 <div class="book-info">
@@ -122,6 +121,7 @@
     
     .list-title {
         color: grey;
+        margin:0;
         margin-left: 1rem;
         margin-bottom: 0.5rem;
     }

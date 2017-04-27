@@ -24,7 +24,7 @@
             </div>
         </header>
         <div class="tab-show">
-            <transition mode="out-in" enter-active-class="animated fadeInRight" leave-active-class="animated fadeOut" class="fade-animate">
+            <transition mode="out-in" enter-active-class="animated fadeInRight" leave-active-class="animated fadeOutRight" class="fade-animate">
                 <router-view></router-view>
             </transition>
     
@@ -36,7 +36,6 @@
     export default {
         data() {
             return {
-                activeName: '追书',
                 tabs: [{
                     name: '追书',
                     path: '/books'
@@ -49,9 +48,17 @@
                 }]
             }
         },
+        computed: {
+            activeName() {
+                let index = this.$store.state.tabIndex;
+                return this.tabs[index].name;
+            }
+        },
         methods: {
             handleClick(tab, event) { //切换tab
                 let path = this.tabs[tab.index].path;
+                let index = tab.index;
+                this.$store.commit('changeTab', index)
                 this.$router.push(path);
             }
         }
@@ -61,6 +68,10 @@
 <style lang="less">
     @mainColor: #20a0ff;
     .appbar {}
+    
+    .fix-margin {
+        padding: 1px !important;
+    }
     
     .animated {
         transition: .5s !important;
@@ -99,5 +110,4 @@
     }
     
     .tab-show {}
-    
 </style>

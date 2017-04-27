@@ -7,6 +7,7 @@ import Find from '@/components/find/find'
 import Book from '@/components/book/book'
 import RankTypes from '@/components/rank/ranktypes'
 import RankList from '@/components/rank/ranklist'
+import BookDetail from '@/components/rank/bookdetail'
 Vue.use(Router)
 
 export default new Router({
@@ -35,5 +36,9 @@ export default new Router({
     }, {
         path: '/ranktypes/:id', //排名表
         component: RankList
+    }, {
+        path: '/bookdetail/:id',
+        name: 'BookDetail',
+        component: BookDetail
     }]
 })

@@ -13,6 +13,8 @@ let apis = {
     getChapterContent: "http://chapter2.zhuishushenqi.com/chapter/", //获取章节信息
     getChapters: "http://api.zhuishushenqi.com/mix-atoc/", //获取章节
     // ==end==
+    //热门评论
+    getComments: base_url + "/post/review/best-by-book"
 
 }
 
