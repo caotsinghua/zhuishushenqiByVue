@@ -2,7 +2,7 @@
     <header>
         <div class="header-bar">
             <a href="javascript:;" class="back-btn" @click="back()"><i class="el-icon-arrow-left"></i></a>
-            <slot></slot>
+            <slot class="title"></slot>
             <el-button type="primary" icon="more" class="more-btn"></el-button>
         </div>
     </header>

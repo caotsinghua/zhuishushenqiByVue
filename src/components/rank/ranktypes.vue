@@ -63,7 +63,7 @@
 
 <style lang="less" scoped>
     .ranktypes {
-        padding-top:3rem;
+        padding-top:3.5rem;
         .title {
             margin-left: 1rem;
         }

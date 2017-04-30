@@ -5,4 +5,5 @@ export default {
     changeTab(state, index) {
         state.tabIndex = index;
     }
+
 }

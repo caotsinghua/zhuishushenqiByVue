@@ -5,6 +5,35 @@ let apis = {
     bird: "http://bird.ioliu.cn/v1/?url=",
     getBook: "http://api.zhuishushenqi.com/book/", //获取指定书籍信息
     getCategoryInfo: "http://api.zhuishushenqi.com/cats/lv2", //带子分类的父分类
+    getCategories: "http://api.zhuishushenqi.com/cats/lv2/statistics", //获取分类
+    getCategoryBooks: base_url + "/book/by-categories", //获取分类的书籍
+    //   /**
+    //    * GET 按分类获取书籍列表
+    //    * @param gender male、female
+    //    * @param type   hot(热门)、new(新书)、reputation(好评)、over(完结)
+    //    * @param major  玄幻
+    //    * @param start  从多少开始请求
+    //    * @param minor  东方玄幻、异界大陆、异界争霸、远古神话
+    //    * @param limit  50
+    //    */
+    //=====获取主题书单===
+    getTopicBooks: base_url + "/book-list",
+    //   /**
+    //    * GET 获取主题书单列表
+    //    * @param 本周最热：duration=last-seven-days&sort=collectorCount
+    //    * @param 最新发布：duration=all&sort=created
+    //    * @param 最多收藏：duration=all&sort=collectorCount
+    //    * @param start 从多少开始请求
+    //    * @param tag 都市、古代、架空、重生、玄幻、网游
+    //    * @param gender male、female
+    //    * @param limit  20
+    //    */
+    //   DISCOVER_BOOK_LIST: API_BASE_URL + '/book-list',
+    //   // GET 获取主题书单标签列表
+    //   DISCOVER_BOOK_LIST_TAG: API_BASE_URL + '/book-list/tagType',
+    //   // GET 获取书单详情
+    //   DISCOVER_BOOK_LIST_DETAIL: (bookListId) => {return API_BASE_URL + '/book-list/' + bookListId},
+    // ============
     getAuthorBooks: "http://api02u58f.zhuishushenqi.com/book/accurate-search?author=", //根据作者查询书籍
     //排名
     getRankCategories: "http://api.zhuishushenqi.com/ranking/gender", //排名分类,

@@ -22,6 +22,11 @@
                     className: 'el-icon-upload',
                     path: '/ranktypes'
                 }, {
+                    name: '主题书单',
+                    url: '',
+                    className: 'el-icon-document',
+                    path: '/topics'
+                },{
                     name: '分类',
                     url: '',
                     className: 'el-icon-edit',

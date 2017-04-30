@@ -6,12 +6,14 @@ import router from './router'
 import axios from 'axios'
 import ElementUI from 'element-ui'
 import store from './store/index'
+import infiniteScroll from 'vue-infinite-scroll'
 Vue.config.productionTip = false
 
 
 import 'element-ui/lib/theme-default/index.css'
 import '../static/css/animate.css'
 Vue.use(ElementUI);
+Vue.use(infiniteScroll);
 Vue.prototype.$http = axios;
 /* eslint-disable no-new */
 new Vue({
