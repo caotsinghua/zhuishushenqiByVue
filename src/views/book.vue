@@ -26,8 +26,8 @@
 </template>
 
 <script>
-    import apis from '../../store/apis'
-    import header from '../common/header'
+    import apis from '../store/apis.js'
+    import header from '../components/header.vue'
     const getChaptersQuery = "?view=chapters";
     export default {
         data() {

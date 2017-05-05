@@ -28,11 +28,10 @@
 </template>
 
 <script>
-import apis from '../../store/apis'
+  import apis from '../store/apis.js'
+import header from '../components/header.vue'
 
-import header from '../common/header'
-
-import booklist from '../common/bookList'
+import booklist from '../components/bookList'
 
 export default {
 

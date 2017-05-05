@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="header">
-            <img src="../../../static/img/logo.png" alt="" class="logo">
+            <img src="../../static/img/logo.png" alt="" class="logo">
             <h1 class="title">VueBook</h1>
         </div>
         <transition enter-active-class="animated bounceInRight" leave-active-class="animated fadeOutLeft" mode="out-in">
@@ -9,7 +9,7 @@
                 <h1 class="title">登录</h1>
                 <el-form :model="loginForm" ref="loginForm" label-width="80px" label-position="left" :rules="rules">
                     <el-form-item label="用户名" prop="username">
-                        <el-input type="password" v-model="loginForm.username" auto-complete="off"></el-input>
+                        <el-input type="text" v-model="loginForm.username" auto-complete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="password">
                         <el-input type="password" v-model="loginForm.password" auto-complete="off"></el-input>
@@ -27,7 +27,7 @@
                 <h1 class="title">注册</h1>
                 <el-form :model="registerForm" ref="registerForm" label-width="80px" label-position="left" :rules="rules">
                     <el-form-item label="用户名" prop="username">
-                        <el-input type="password" v-model="registerForm.username" auto-complete="off"></el-input>
+                        <el-input type="text" v-model="registerForm.username" auto-complete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="password">
                         <el-input type="password" v-model="registerForm.password" auto-complete="off"></el-input>
@@ -50,7 +50,7 @@
     </div>
 </template>
 <script>
-import apis from '../../store/apis.js'
+import apis from '../store/apis.js'
 export default {
     data() {
         let validateRepass = (rule, value, cb) => {
@@ -115,11 +115,22 @@ export default {
                             }, 2000);
                             this.$router.push('/books');
                         } else {
+                            this.resetForm(name)
                             this.errorMsg = res.data.message;
                             this.showErr = true;
+                            setTimeout(() => {
+                                this.errorMsg = '';
+                                this.showErr = false;
+                            }, 2000);
                         }
                     }).catch(err => {
-                        console.log(err)
+                        this.resetForm(name)
+                        this.errorMsg = "登录失败："+err;
+                        this.showErr = true;
+                        setTimeout(() => {
+                                this.errorMsg = '';
+                                this.showErr = false;
+                            }, 2000);
                         return;
                     })
                 }
@@ -142,11 +153,22 @@ export default {
                             this.goLog = true;
 
                         } else {
+                            this.resetForm(name)
                             this.errorMsg2 = res.data.message;
                             this.showErr = true;
+                            setTimeout(() => {
+                                this.errorMsg2 = '';
+                                this.showErr = false;
+                            }, 2000);
                         }
                     }).catch(err => {
-                        console.log(err)
+                        this.resetForm(name)
+                        this.errorMsg2 ="注册失败："+err;
+                        this.showErr = true;
+                        setTimeout(() => {
+                                this.errorMsg2 = '';
+                                this.showErr = false;
+                            }, 2000);
                         return;
                     })
                 }

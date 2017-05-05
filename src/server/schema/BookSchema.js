@@ -5,5 +5,5 @@ module.exports=new mongoose.Schema({//书籍
     bookId:String,
     updateTime:Date,
     updateChapter:String,
-    lastReadTime:Date
+    
 })

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import apis from '../../store/apis'
+    import apis from '../store/apis.js'
     export default {
         data() {
             return {

@@ -1,17 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Main from '@/components/main/main'
-import Login from '@/components/main/login'
-import Books from '@/components/books/books'
-import Communities from '@/components/communities/communities'
-import Find from '@/components/find/find'
-import Book from '@/components/book/book'
-import RankTypes from '@/components/rank/ranktypes'
-import RankList from '@/components/rank/ranklist'
-import BookDetail from '@/components/rank/bookdetail'
-import Topics from '@/components/topics/topics'
-import Categories from '@/components/categories/categories'
-import CategoryBooks from '@/components/categories/categoryBooks'
+import Main from '@/views/main'
+import Login from '@/views/login'
+import Books from '@/views/books'
+import Communities from '@/views/communities'
+import Find from '@/views/find'
+import Book from '@/views/book'
+import RankTypes from '@/views/ranktypes'
+import RankList from '@/views/ranklist'
+import BookDetail from '@/views/bookdetail'
+import Topics from '@/views/topics'
+import Categories from '@/views/categories'
+import CategoryBooks from '@/views/categoryBooks'
+import NotFound from '@/views/notfound'
 Vue.use(Router)
 let router = new Router({
   mode: 'history',
@@ -19,13 +20,12 @@ let router = new Router({
     path: '/', //整个界面
     name: 'index',
     component: Main,
+    redirect: {
+      name: 'Books'
+    },
     children: [{ //主界面内部，tab以下
-      path: '',
-      name: 'books',
-      component: Books,
-    }, { //主界面内部，tab以下
       path: 'books',
-      name: 'books',
+      name: 'Books',
       component: Books,
     }, {
       path: 'Communities',
@@ -33,7 +33,7 @@ let router = new Router({
       component: Communities
     }, {
       path: 'find',
-      name: 'find',
+      name: 'Find',
       component: Find
     }]
   }, { //整个界面
@@ -68,16 +68,20 @@ let router = new Router({
     path: '/login',
     name: 'Login',
     component: Login
+  },{
+    path:'*',
+    name:'404',
+    component:NotFound
   }]
 })
-let getCookie = function(name) {
+let getCookie = function (name) {
   let cookie = document.cookie.split(";");
   //console.log(document.cookie);
-  let ans='';
-  cookie.forEach(function(item){
-    if (item.indexOf(name)!=-1) {
+  let ans = '';
+  cookie.forEach(function (item) {
+    if (item.indexOf(name) != -1) {
       ans = item.split("=")[1];
-      return ;
+      return;
     }
   })
   return ans;
@@ -85,11 +89,12 @@ let getCookie = function(name) {
 router.beforeEach((to, from, next) => {
   //to and from are Route Object,next() must be called to resolve the hook
   getCookie('userInfo')
-  console.log(document.cookie);
-  if (to.name == "index" || to.name == "books") {
-    if(!getCookie('userInfo')){
+  if (to.name == "Login") {
+    next();
+  } else {//除登录的页面
+    if (!getCookie('userInfo')) {
       next('/login');
-    }else{
+    } else {
       next();
     }
   }

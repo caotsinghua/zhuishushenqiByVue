@@ -1,5 +1,7 @@
 const express = require('express');
 const UserModel = require('../models/UserModel')
+const http=require('http')
+
 let router = express.Router();
 let responseData = {
   success: true,
@@ -107,7 +109,18 @@ router.get('/user', function (req, res) {
 //追书
 router.post('/addbook',function(req,res){
   let bookId=req.body.id;
-  let userId=req.cookies;
-  res.json(userId)
+  let userId=JSON.parse(req.cookies.get('userInfo')).userid;
+  console.log(bookId);
+  console.log(userId)
+  let msg='';
+  http.get("http://api.zhuishushenqi.com/book/"+bookId,function(req2,res2){
+    req2.on('data',function(data){
+     msg+=data;
+    })
+    req2.on('end',function(){
+      res.json(JSON.parse(msg))
+    })   
+  })
+  
 })
 module.exports = router;

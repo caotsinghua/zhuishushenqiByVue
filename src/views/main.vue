@@ -11,11 +11,11 @@
                         <el-col :span="12" class="menu-btns">
                             <el-button type="primary" icon="menu"></el-button>
                             <el-button type="primary" icon="search"></el-button>
-                            <el-dropdown>
+                            <el-dropdown @command="handleCommand">
                                 <span class="el-dropdown-link"><i class="el-icon-more"></i></span>
                                 <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item><i class="el-icon-arrow-right el-icon--left"></i>登录</el-dropdown-item>
-                                    <el-dropdown-item><i class="el-icon-arrow-right el-icon--left"></i>登出</el-dropdown-item>
+                                    <el-dropdown-item ><i class="el-icon-star-on el-icon--left"></i>{{userInfo.username}}</el-dropdown-item>
+                                    <el-dropdown-item command="logout"><i class="el-icon-upload2 el-icon--left"></i>登出</el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </el-col>
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import util from '../util.js'
 export default {
     data() {
         return {
@@ -52,7 +53,8 @@ export default {
             }, {
                 name: '发现',
                 path: '/find'
-            }]
+            }],
+            userInfo: {}
         }
     },
     computed: {
@@ -61,8 +63,11 @@ export default {
             return this.tabs[index].name;
         }
     },
+    created(){
+        this.getUserInfo("userInfo");
+    },
     components: {
-      
+
     },
     methods: {
         handleClick(tab, event) { //切换tab
@@ -70,6 +75,21 @@ export default {
             let index = tab.index;
             this.$store.commit('changeTab', index)
             this.$router.push(path);
+        },
+        getUserInfo(name) {
+            let cookies = document.cookie.split(";");
+            cookies.forEach( (item)=> {
+                if (item.indexOf(name) != -1) {
+                    this.userInfo=JSON.parse(item.split("=")[1]);
+                    return;
+                }
+            })
+        },
+        handleCommand(command){
+            if(command=="logout"){
+                util.deleteCookie('userInfo');
+                this.$router.go(0)
+            }
         }
     }
 }
@@ -112,6 +132,7 @@ export default {
         }
     }
 }
+
 .tabs-wrap {
     width: 100%;
     .el-tabs__nav {
@@ -126,5 +147,4 @@ export default {
 }
 
 .tab-show {}
-
 </style>
