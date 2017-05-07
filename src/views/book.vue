@@ -65,6 +65,7 @@
                 let chapter = this.chapters[index];
                 this.chapterTitle = chapter.title;
                 this.$http.get(apis.bird + apis.getChapterContent + chapter.link).then(res => {
+                    
                     if (res.data.chapter) {
                         this.bookContent = res.data.chapter;
                         this.bookContent.body = this.bookContent.body.replace(/\n/g, "<br>");

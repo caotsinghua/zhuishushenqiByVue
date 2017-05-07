@@ -17,7 +17,6 @@ router.post('/login', (req, res) => {
     username: username,
     password: password
   }, (err, user) => {
-    console.log(user)
     if (!user) {
       responseData.success = false;
       responseData.message = '登录失败,请检查用户名密码'
@@ -52,7 +51,6 @@ router.post('/register', (req, res) => {
     password: req.body.password,
     repassword: req.body.repassword
   }
-  console.log(user);
   if (user.password != user.repassword) {
     responseData.success = false;
     responseData.message = '两次密码不一致!'
@@ -106,7 +104,6 @@ router.get('/user', function (req, res) {
     if (err) {
       throw err;
     } else {
-      console.log(data)
       res.json(data)
     }
   })
@@ -114,7 +111,7 @@ router.get('/user', function (req, res) {
 //追书
 router.post('/addbook', function (req, res) {
   let bookId = req.body.id; //书籍id
-  let userId = JSON.parse(req.cookies.get('userInfo')).userid; //用户数据库id
+  let userId = req.body.userid;
 
   let msg = '';
   http.get("http://api.zhuishushenqi.com/book/" + bookId, function (req2, res2) {
@@ -168,6 +165,7 @@ router.post('/addbook', function (req, res) {
             }
           })
         }else{
+          console.log('已追此书')
           res.json({
               success: false,
               message: '已追了此书'

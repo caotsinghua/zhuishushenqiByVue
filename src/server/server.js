@@ -20,11 +20,6 @@ app.use(cors({
 
 app.use(function(req,res,next){
     req.cookies=new cookies(req,res)
-    if(req.cookies.get('userInfo')){
-        console.log(req.cookies.get('userInfo'))
-    }else{
-        console.log("no cookie")
-    }
     next();
 })
 app.use('/',main);

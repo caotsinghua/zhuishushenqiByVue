@@ -13,6 +13,7 @@ Vue.config.productionTip = false
 
 import 'element-ui/lib/theme-default/index.css'
 import '../static/css/animate.css'
+import '../static/css/reset.css'
 Vue.use(ElementUI);
 Vue.use(infiniteScroll);
 

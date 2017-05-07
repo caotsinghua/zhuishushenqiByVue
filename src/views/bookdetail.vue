@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="book-btns">
-        <el-button type="primary" @click="addBook()"><i class="el-icon-plus el-icon--left"></i>追更新</el-button>
+        <el-button type="primary" @click="addBook()" :disabled="isAdd"><i class="el-icon-plus el-icon--left"></i>追更新</el-button>
         <el-button type="primary" @click="startRead()"><i class="el-icon-search el-icon--left"></i>开始阅读</el-button>
       </div>
       <div class="book-number">
@@ -48,19 +48,21 @@
 <script>
 import apis from '../store/apis.js'
 import header from '../components/header.vue'
+import util from '../util'
 export default {
   data() {
     return {
       bookId: '',
       book: {},
       tagTypes: ['gray', 'primary', 'success', 'warning', 'danger'],
-      wordMore: true
+      wordMore: true,
+      isAdd:false
     }
   },
   created() {
     this.getBookInfo();
     this.getComments();
-    console.log(this.bookId)
+    this.hasAdd();
   },
   components: {
     'my-header': header
@@ -109,7 +111,6 @@ export default {
         this.book = res.data;
         this.book.cover = this.book.cover.replace("/agent/", apis.img_url + "/agent/");
         this.book.longIntro = this.book.longIntro.replace("\n", "<br>");
-        console.log(this.book);
       })
     },
     getComments() {
@@ -121,10 +122,39 @@ export default {
       this.$router.push("/book/" + this.bookId);
     },
     addBook() { //追更新
-      this.$http.post(apis.addbook,{
-        id:this.bookId
+      let userInfo = JSON.parse(util.getCookie('userInfo'));
+      let form = {
+        id: this.bookId,
+        userid: userInfo.userid
+      }
+      this.$http.post("http://localhost:3000/api/addbook", form).then((res) => {
+        if (res.data.success) {
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          });
+          this.isAdd = true;//添加已经追书的标记
+        } else {
+          this.$message.error(res.data.message);
+        }
+      }).catch(err => {
+        throw err;
       })
       return;
+    },
+    hasAdd(){
+      let id = JSON.parse(util.getCookie('userInfo')).userid;
+      this.$http.get("http://localhost:3000/"+apis.getuser + "?id=" + id).then(res => {
+       let booklist=res.data.booklist;
+       booklist.forEach(item=>{
+         if(item.bookId.toString()==this.bookId){
+            this.isAdd=true;
+            return ;
+         }
+       })
+      }).catch(err => {
+        throw err;
+      })
     }
   }
 }
