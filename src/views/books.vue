@@ -1,27 +1,32 @@
 <template>
     <div class="books-wrap" key="books">
-    <h1 v-if="books.length==0" class="ifno">没有正在追的书籍~</h1>
-        <ul class="books">
-            <li class="book" v-for="(book,index) in books" @click="readBook(index)">
-                <div class="book-info">
-                    <img :src="book.cover" :alt="book.title">
-                    <div class="book-text">
-                        <p>{{book.title}}</p>
-                        <div>
-                            <span>{{book.updateTime|updateTime}}</span>
-                            <span>{{book.updateChapter}}</span>
+        <h1 v-if="books.length==0" class="ifno">没有正在追的书籍~</h1>
+        <div class="scroll-wrap" ref="booklist">
+            <ul class="books">
+                <li class="book" v-for="(book,index) in books" @click="readBook(index)">
+                    <div class="book-info">
+                        <img :src="book.cover" :alt="book.title">
+                        <div class="book-text">
+                            <p>{{book.title}}</p>
+                            <div>
+                                <span>{{book.updateTime|updateTime}}</span>
+                                <span>{{book.updateChapter}}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div v-if="book.hasNew" class="hasnew"></div>
-            </li>
-        </ul>
+                    <div v-if="book.hasNew" class="hasnew"></div>
+                </li>
+            </ul>
+        </div>
+    
     </div>
 </template>
 
 <script>
 import apis from '../store/apis.js'
 import util from '../util.js'
+import BScroll from 'better-scroll'
+
 export default {
     data() {
         return {
@@ -30,6 +35,11 @@ export default {
     },
     created() {
         this.getUserBooks();
+        this.$nextTick(() => {
+            this.scroll = new BScroll(this.$refs.booklist,{
+                click:true
+            })
+        })
     },
     filters: {
         updateTime(time) {
@@ -66,8 +76,8 @@ export default {
             let id = JSON.parse(util.getCookie('userInfo')).userid;
             this.$http.get(apis.getuser + "?id=" + id).then(res => {
                 this.books = res.data.booklist;
-                this.books.forEach(item=>{
-                    item.hasNew=true;
+                this.books.forEach(item => {
+                    item.hasNew = true;
                 })
             }).catch(err => {
                 throw err;
@@ -87,10 +97,14 @@ export default {
 @bgColor: #fff;
 @mainColor: #20a0ff;
 .books-wrap {
-    width: 100%;
     background: @bgColor;
+    width: 100%;
+
     li:last-child.book {
         border-bottom: 1px solid #eee;
+    }
+    .books {
+       min-height: calc(100vh-2rem);
     }
     .book {
         display: flex;
@@ -136,7 +150,10 @@ export default {
         }
     }
 }
-
+.scroll-wrap{
+    height: calc(100vh-5rem);
+    overflow: hidden;
+}
 .container {
     width: 90%;
     margin: 0 auto;
@@ -148,8 +165,9 @@ export default {
     margin-left: 1rem;
     margin-bottom: 0.5rem;
 }
-.ifno{
+
+.ifno {
     text-align: center;
-    color:grey;
+    color: grey;
 }
 </style>

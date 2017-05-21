@@ -78,7 +78,6 @@ export default {
 
 <style lang="less" scoped>
 .categories {
-  padding-top: 3rem;
   .list-title {
     border-bottom: 1px solid #eee;
     line-height: 2rem;

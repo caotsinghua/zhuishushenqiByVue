@@ -35,7 +35,6 @@
 
 <style lang="less" scoped>
   .book-list {
-    padding-top: 2.5rem;
     .list {
       .book {
         padding: 0.5rem 1rem;

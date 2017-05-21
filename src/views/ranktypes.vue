@@ -154,7 +154,6 @@ export default {
 <style lang="less" scoped>
 .ranktypes {
 
-    padding-top: 3.5rem;
 
     .title {
 

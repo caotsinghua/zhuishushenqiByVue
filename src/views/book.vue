@@ -114,7 +114,7 @@
     @bookBgColo_nightr: #000;
     @mainColor: #20a0ff;
     .book{
-        padding-top:2.5rem;
+        
     }
     .content {
         display: block;

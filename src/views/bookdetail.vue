@@ -162,7 +162,6 @@ export default {
 
 <style lang="less" scoped>
 .book-detail {
-  padding-top: 2.5rem;
   background: #eee;
   .title {
     color: #fff;

@@ -97,7 +97,11 @@ export default {
 
 <style lang="less">
 @mainColor: #20a0ff;
-.appbar {}
+.appbar {
+    position: sticky;
+    position: -webkit-sticky;
+    top:0;
+}
 
 .fix-margin {
     padding: 1px !important;

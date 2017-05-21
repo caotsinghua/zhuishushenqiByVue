@@ -146,9 +146,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.tabs-wrap {
-    padding-top: 2.5rem;
-}
+
 
 .book-list {
     padding-top: 0 !important;
