@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "presets": [
     ["env", { "modules": false }],
@@ -12,3 +13,19 @@
     }
   }
 }
+=======
+{
+  "presets": [
+    ["env", { "modules": false }],
+    "stage-2"
+  ],
+  "plugins": ["transform-runtime"],
+  "comments": false,
+  "env": {
+    "test": {
+      "presets": ["env", "stage-2"],
+      "plugins": [ "istanbul" ]
+    }
+  }
+}
+>>>>>>> 2e62cf3712471af45e55247baf5ad9afea432150
