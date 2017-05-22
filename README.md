@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## 仿追书神器app写的webapp（未上线）
 > 技术栈：
 > 前端：vue全家桶+axios+element-ui
